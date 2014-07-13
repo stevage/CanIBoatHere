@@ -30,8 +30,9 @@
 }
 
 #slipway {
-  line-color:darkblue;
-  line-width:3;
+  //line-color:darkblue;
+  //line-width:3;
+  marker-file:url('transport_slipway.p.24.png'); 
 }
 
 #pier {
@@ -89,3 +90,26 @@
   raster-scaling:bilinear;
   raster-comp-op:multiply;
 }
+
+#beaches {
+  polygon-fill:hsl(60,70%,80%);
+}
+
+#roads {
+  line-width:0.5;
+  line-color:lightgray;
+}
+
+
+#lighthouses {
+  marker-width:6;
+  marker-file:url('maki/star-24.png');
+  marker-allow-overlap:true;
+}
+
+#riverlabels {
+  text-face-name:'Roboto Light Italic';
+  text-fill:hsl(220,60%,60%);
+  text-placement:line;
+  text-name:[name];
+  }

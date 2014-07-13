@@ -1,23 +1,31 @@
 {
   "bounds": [
-    -180,
-    -85.05112877980659,
-    180,
-    85.05112877980659
+    143.811,
+    -38.8055,
+    146.272,
+    -36.7565
   ],
   "center": [
-    0,
-    0,
-    2
+    145.0305,
+    -37.7707,
+    7
   ],
   "format": "png8",
   "interactivity": {
     "layer": "pointpoints",
     "template_teaser": "{{{MarkerSche}}}, {{{Associated}}}",
-    "template_full": "{{{Position}}} {{{AssetOrFea}}} {{{AssetOrF_1}}} {{{AssetOrF_2}}}"
+    "template_full": "{{{Position}}} {{{AssetOrFea}}} {{{AssetOrF_1}}} {{{AssetOrF_2}}}",
+    "fields": [
+      "Position",
+      "AssetOrFea",
+      "AssetOrF_1",
+      "AssetOrF_2",
+      "MarkerSche",
+      "Associated"
+    ]
   },
   "minzoom": 0,
-  "maxzoom": 22,
+  "maxzoom": 17,
   "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
   "Stylesheet": [
     "style.mss",
@@ -362,32 +370,6 @@
       ],
       "Datasource": {
         "type": "postgis",
-        "table": "(select way from planet_osm_line where leisure='slipway'\nunion\nselect way from planet_osm_polygon where leisure='slipway'\n) p",
-        "key_field": "",
-        "geometry_field": "",
-        "extent_cache": "auto",
-        "extent": "5552423.1,-7424772.16,20032279.22,3173532.12",
-        "dbname": "gis",
-        "host": "gis.researchmaps.net",
-        "user": "gis",
-        "password": "gis"
-      },
-      "id": "slipway",
-      "class": "",
-      "srs-name": "900913",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "advanced": {},
-      "name": "slipway"
-    },
-    {
-      "extent": [
-        49.87826534628294,
-        -55.32281745483311,
-        179.95302599075885,
-        27.399969324086747
-      ],
-      "Datasource": {
-        "type": "postgis",
         "table": "(select way,name from planet_osm_line where man_made='pier'\nunion\nselect way,name from planet_osm_polygon where man_made='pier') p",
         "key_field": "",
         "geometry_field": "",
@@ -474,11 +456,142 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "advanced": {},
       "name": "demhs"
+    },
+    {
+      "extent": [
+        49.87826534628294,
+        -55.32281745483311,
+        179.95302599075885,
+        27.399969324086747
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select * from planet_osm_polygon\nwhere \"natural\"='beach') p",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "auto",
+        "extent": "5552423.1,-7424772.16,20032279.22,3173532.12",
+        "dbname": "gis",
+        "host": "gis.researchmaps.net",
+        "user": "gis",
+        "password": "gis"
+      },
+      "id": "beaches",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "beaches"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        49.87826534628294,
+        -55.94929545595491,
+        179.9999999749438,
+        31.466431033464257
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select *\nfrom planet_osm_line\nwhere highway in ('motorway','primary','trunk','secondary','tertiary') )p",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "auto",
+        "extent": "5552423.1,-7548328.43,20037508.34,3693473.4",
+        "host": "gis.researchmaps.net",
+        "user": "gis",
+        "dbname": "gis"
+      },
+      "id": "roads",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "roads"
+    },
+    {
+      "extent": [
+        49.87826534628294,
+        -55.32281745483311,
+        179.95302599075885,
+        27.399969324086747
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select way from planet_osm_line where leisure='slipway'\nunion\nselect way from planet_osm_polygon where leisure='slipway'\n) p",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "auto",
+        "extent": "5552423.1,-7424772.16,20032279.22,3173532.12",
+        "dbname": "gis",
+        "host": "gis.researchmaps.net",
+        "user": "gis",
+        "password": "gis"
+      },
+      "id": "slipway",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "slipway"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        50.16924689301642,
+        -54.77242729472166,
+        179.9977666749446,
+        24.789112296764717
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select *\nfrom planet_osm_point where man_made='lighthouse') p",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "auto",
+        "extent": "5584815.01761261,-7317823.57245253,20037259.7301813,2849863.9668471",
+        "host": "gis.researchmaps.net",
+        "user": "gis",
+        "dbname": "gis"
+      },
+      "id": "lighthouses",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "lighthouses"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        49.87826534628294,
+        -55.94929545595491,
+        179.9999999749438,
+        31.466431033464257
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select *\nfrom planet_osm_line\nwhere waterway in ('river','stream','drain','canal') )p",
+        "key_field": "",
+        "geometry_field": "",
+        "extent_cache": "auto",
+        "extent": "5552423.1,-7548328.43,20037508.34,3693473.4",
+        "host": "gis.researchmaps.net",
+        "user": "gis",
+        "dbname": "gis"
+      },
+      "id": "riverlabels",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "riverlabels"
     }
   ],
   "scale": 1,
   "metatile": 2,
-  "name": "",
-  "description": "",
-  "legend": ""
+  "name": "CanIBoatHere",
+  "description": "caniboathere.com",
+  "legend": "",
+  "attribution": "Steve Bennett, Transport Safety Victoria"
 }
