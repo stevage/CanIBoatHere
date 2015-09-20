@@ -1,17 +1,117 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
-<meta name="VERSION" content="">
-<meta name="DATA" content="fwdnode2.registrar-servers.com (98.142.221.8)">
-<link href=" " rel="shortcut icon" type="image/x-icon">
-<title></title>
-</head>
-<frameset rows='100%, *' frameborder=no framespacing=0 border=0>
-<frame src="http://130.56.249.208/waterways.html" name=mainwindow frameborder=no framespacing=0 marginheight=0 marginwidth=0></frame>
-</frameset>
-<noframes><h2>Your browser does not support frames. We recommend upgrading your browser.</h2><br><br>
-<center>Click <a href="http://130.56.249.208/waterways.html" >here</a> to enter the site.</center>
-</noframes>
-</html>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+ <![endif]-->
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<style>
+    #map { 
+        position: absolute;
+        top: 0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+    #legend { 
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width:140px;
+        font-size:12px;
+        /*width: 50px;*/
+        background:white;
+        border: 1px solid gray;
+        padding: 12px;
+        font-family:helvetica;
+    }
+    #legend ul { 
+        list-style-type: none;
+        padding: 0.5 1em;
+        font-family: sans-serif;
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+        padding-left:0;
+    }
+    .hero {
+        font-size: 60px;
+        font-family:helvetica;
+        color:hsl(200,60%,60%);
+        border-radius:12px;
+        background-clip:padding-box;
+        background:white;
+        background-image:         linear-gradient(to bottom, #eee, #eef);
+        padding:0.5em 1em;
+        -webkit-transform: rotate(-3deg); 
+        transform:rotate(-3deg);
+        
+        position:absolute;
+        left:20%;
+        top:-20px;
+        border:1px solid #adf;
+    }
 
+</style>
+<title>Can I boat here?</title>
+</head>
+<body>
+    <div id="map"></div>
+    <h1 class="hero">Can I boat here?</h1>
+    <div id="legend">
+    Can I boat here?
+    <ul>
+
+        <li style="color:hsla(330,80%,70%,0.8);">Yes</li>
+        <li style="color:orange;opacity:0.8;">Speed restricted</li>
+        <li style="color:green;opacity:0.8;">Speed exclusions</li>
+        <li style="color:blue;opacity:0.8;">Yes (no bathing)</li>
+        <li style="color:hsla(110,80%,70%,0.8);">Activities Prohibited</li>
+        <li style="color:gray; opacity:0.8;">Special purpose</li>
+        <li style="color:hsla(0,95%,50%,0.8);">No</li>
+    </ul>
+    <a target="_blank" href="http://www.transportsafety.vic.gov.au/__data/assets/pdf_file/0009/41121/Victorian-Recreational-Boating-Safety-Handbook.pdf">Victorian Recreational Boating Safety Handbook</a>
+    <br/>
+    <br/>
+    <small>
+        
+    </small>Site by <a href="http://stevebennett.me">Steve Bennett</a>. 
+    <br/>
+    Code and data on <a href="http://github.com/stevage/CanIBoatHere">Github</a>.
+    </small>
+    </div>
+    <script>
+        $(function() {
+        var map = L.map('map', {
+          maxBounds: L.latLngBounds(L.latLng(-38.8, 143.81), L.latLng(-37.56, 146.27)) 
+          }
+        );//.setView([-37.8, 145.0], 12);
+        map.locate({setView: true, maxZoom: 15});
+        //map.setBounds(L.latLngBounds(L.latLng(-38.8, 143.81), L.latLng(-37.56, 146.27)));
+        var ts=Math.round(new Date().getTime()/1000.0);
+
+        L.tileLayer(
+        //'http://cycletour.org/tile/waterways/{z}/{x}/{y}.png?updated='+ts
+        'http://a.cycletour.org:5500/v2/waterways_a53dae/{z}/{x}/{y}.png'
+        , {
+            maxZoom: 18,
+            attribution: 'Zoning data: <a href="https://www.data.vic.gov.au/raw_data/transport-safety-victoria-waterways-data-govhack-2014-subset/7761">Transport Safety Victoria</a>, Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+        }).addTo(map);
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            /*popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);*/
+        }
+
+        map.on('click', onMapClick);
+
+        });
+    </script>
+
+</body>
+</html>
